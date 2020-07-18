@@ -1,12 +1,12 @@
 syntax = "proto3";
 
 import "daemon/common.proto";
-import "hyperdrive.proto";
+import "dwebfs.proto";
 
 // Cross-drive operations
 
 /**
- * Create a session for a hyperdrive by key, version, and hash.
+ * Create a session for a dwebfs by key, version, and hash.
  */
 message GetDriveRequest {
   HyperdriveOptions opts = 1; // Hyperdrive options.

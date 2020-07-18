@@ -1,2 +1,2 @@
-# hyperdrive-schemas
+# dwebfs-schemas
 Protobuf/gRPC schemas for the Hyperdrive API.
