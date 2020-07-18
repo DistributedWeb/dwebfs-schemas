@@ -4,23 +4,23 @@
   "description": "dWebFS schemas",
   "main": "index.js",
   "scripts": {
-    "build": "protocol-buffers schemas/hyperdrive.proto -o lib/messages.js"
+    "build": "protocol-buffers schemas/dwebfs.proto -o lib/messages.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andrewosh/hyperdrive-schemas.git"
+    "url": "git+https://github.com/andrewosh/dwebfs-schemas.git"
   },
   "keywords": [
-    "hyperdrive",
+    "dwebfs",
     "protobuf",
     "schema"
   ],
   "author": "Andrew Osheroff <andrewosh@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andrewosh/hyperdrive-schemas/issues"
+    "url": "https://github.com/andrewosh/dwebfs-schemas/issues"
   },
-  "homepage": "https://github.com/andrewosh/hyperdrive-schemas#readme",
+  "homepage": "https://github.com/andrewosh/dwebfs-schemas#readme",
   "devDependencies": {
     "protocol-buffers": "^4.1.0"
   }

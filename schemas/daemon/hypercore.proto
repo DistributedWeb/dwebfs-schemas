@@ -4,7 +4,7 @@ import "daemon/common.proto";
 import "daemon/drive.proto";
 
 /**
- * Opens a hypercore session.
+ * Opens a ddatabase session.
  */
 message GetCoreRequest {
   HypercoreOptions opts  = 1; // Hypercore options.
