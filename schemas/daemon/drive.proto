@@ -9,12 +9,28 @@ import "dwebfs.proto";
  * Create a session for a dwebfs by key, version, and hash.
  */
 message GetDriveRequest {
-  HyperdriveOptions opts = 1; // Hyperdrive options.
+  HyperdriveOptions opts = 1; // DWebFs options.
 }
 message GetDriveResponse {
   uint64 id = 1; // A new session ID.
-  HyperdriveOptions opts = 2; // Hyperdrive options.
+  HyperdriveOptions opts = 2; // DWebFs options.
 }
+
+/*
+ * Mirror (download all metadata/contents continuously) a drive.
+ */
+message MirrorRequest {
+  uint64 id = 1;
+}
+message MirrorResponse {}
+
+/*
+ * Stop mirroring a drive.
+ */
+message UnmirrorRequest {
+  uint64 id = 1;
+}
+message UnmirrorResponse {}
 
 /**
  * Get networking statistics across all drives.
@@ -91,7 +107,7 @@ message DriveMountsResponse {
 // Drive operations
 
 /**
- * Hyperdrive.version
+ * DWebFs.version
  *
  * Get the version of a drive.
  */
@@ -170,7 +186,7 @@ message DeleteMetadataRequest {
 message DeleteMetadataResponse {}
 
 /**
- * Hyperdrive.createDiffStream
+ * DWebFs.createDiffStream
  *
  * Create a diff stream between two versions, optionally within a specified prefix.
  */
@@ -186,7 +202,7 @@ message DiffStreamResponse {
 }
 
 /**
- * Hyperdrive.open
+ * DWebFs.open
  *
  * Opens a file descriptor.
  */
@@ -200,7 +216,7 @@ message OpenResponse {
 }
 
 /**
- * Hyperdrive.download
+ * DWebFs.download
  *
  * Downloads file or directory contents.
  */
@@ -213,7 +229,7 @@ message DownloadResponse {
 }
 
 /**
- * Hyperdrive.undownload
+ * DWebFs.undownload
  *
  * Stop a download that's in progress.
  */
@@ -223,7 +239,7 @@ message UndownloadRequest {
 }
 message UndownloadResponse {}
 
-// Hyperdrive.close (closes either a file descriptor or the whole drive).
+// DWebFs.close (closes either a file descriptor or the whole drive).
 message CloseRequest {
   uint64 id = 1;
   uint32 fd = 2;
@@ -252,14 +268,14 @@ message ReadResponse {
   bytes content = 1;
 }
 
-// Hyperdrive.unlink
+// DWebFs.unlink
 message UnlinkRequest {
   uint64 id = 1;
   string path = 2;
 }
 message UnlinkResponse {}
 
-// Hyperdrive.readdir
+// DWebFs.readdir
 message ReadDirectoryRequest {
   uint64 id = 1;
   string path = 2;
@@ -274,7 +290,7 @@ message ReadDirectoryResponse {
   repeated string innerPaths = 4;
 }
 
-// Hyperdrive.mkdir
+// DWebFs.mkdir
 message MkdirRequest {
   uint64 id = 1;
   string path = 2;
@@ -282,14 +298,14 @@ message MkdirRequest {
 }
 message MkdirResponse {}
 
-// Hyperdrive.rmdir
+// DWebFs.rmdir
 message RmdirRequest {
   uint64 id = 1;
   string path = 2;
 }
 message RmdirResponse {}
 
-// Hyperdrive.stat
+// DWebFs.stat
 message StatRequest {
   uint64 id = 1;
   string path = 2;
@@ -299,28 +315,28 @@ message StatResponse {
   Stat stat = 1;
 }
 
-// Hyperdrive.watch
+// DWebFs.watch
 message WatchRequest {
   uint64 id = 1;
   string path = 2;
 }
 message WatchResponse {}
 
-// Hyperdrive.mount
+// DWebFs.mount
 message MountDriveRequest {
   uint64 id = 1;
   MountInfo info = 2;
 }
 message MountDriveResponse {}
 
-// Hyperdrive.unmount
+// DWebFs.unmount
 message UnmountDriveRequest {
   uint64 id = 1;
   string path = 2;
 }
 message UnmountDriveResponse {}
 
-// Hyperdrive.symlink
+// DWebFs.symlink
 message SymlinkRequest {
   uint64 id = 1;
   string target = 2;
@@ -328,7 +344,7 @@ message SymlinkRequest {
 }
 message SymlinkResponse {}
 
-// Hyperdrive.fileStats
+// DWebFs.fileStats
 message FileStatsRequest {
   uint64 id = 1;
   string path = 2;
@@ -360,6 +376,8 @@ service Drive {
   rpc open (OpenRequest) returns (OpenResponse);
   rpc download (DownloadRequest) returns (DownloadResponse);
   rpc undownload (UndownloadRequest) returns (UndownloadResponse);
+  rpc mirror (MirrorRequest) returns (MirrorResponse);
+  rpc unmirror (UnmirrorRequest) returns (UnmirrorResponse);
   rpc read (stream ReadRequest) returns (stream ReadResponse);
   rpc write (stream WriteRequest) returns (stream WriteResponse);
   rpc createWriteStream (stream WriteStreamRequest) returns (WriteStreamResponse);

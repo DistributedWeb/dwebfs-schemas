@@ -1,27 +1,30 @@
 {
   "name": "dwebfs-schemas",
-  "version": "1.1.0",
-  "description": "dWebFS schemas",
+  "version": "1.0.0",
+  "description": "Protobuf schemas for DWebFs and its daemon.",
   "main": "index.js",
   "scripts": {
     "build": "protocol-buffers schemas/dwebfs.proto -o lib/messages.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andrewosh/dwebfs-schemas.git"
+    "url": "git+https://github.com/distributedweb/dwebfs-schemas.git"
   },
   "keywords": [
     "dwebfs",
     "protobuf",
     "schema"
   ],
-  "author": "Andrew Osheroff <andrewosh@gmail.com>",
+  "author": "jared <jared@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andrewosh/dwebfs-schemas/issues"
+    "url": "https://github.com/distributedweb/dwebfs-schemas/issues"
   },
-  "homepage": "https://github.com/andrewosh/dwebfs-schemas#readme",
+  "homepage": "https://github.com/distributedweb/dwebfs-schemas#readme",
   "devDependencies": {
     "protocol-buffers": "^4.1.0"
+  },
+  "dependencies": {
+    "protocol-buffers-encodings": "^1.1.0"
   }
 }
